@@ -55,7 +55,7 @@ export default function CheckoutPage() {
   ];
 
   const [deliveryMethod, setDeliveryMethod] = useState('pickup');
-  const [paymentMethod, setPaymentMethod] = useState<'paystack' | 'moolre'>('paystack');
+  const [paymentMethod, setPaymentMethod] = useState<'paystack' | 'moolre' | 'stripe' | 'paypal'>('paystack');
   const [errors, setErrors] = useState<any>({});
 
 
@@ -277,6 +277,58 @@ export default function CheckoutPage() {
       if (paymentMethod === 'moolre') {
         try {
           const paymentRes = await fetch('/api/payment/moolre', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              orderId: orderNumber,
+              amount: total,
+              customerEmail: shippingData.email,
+            }),
+          });
+          const paymentResult = await paymentRes.json();
+          if (!paymentResult.success) {
+            throw new Error(paymentResult.message || 'Payment initialization failed');
+          }
+          clearCart();
+          window.location.href = paymentResult.url;
+          return;
+        } catch (paymentErr: any) {
+          console.error('Payment Error:', paymentErr);
+          alert('Failed to initialize payment: ' + paymentErr.message);
+          setIsLoading(false);
+          return;
+        }
+      }
+
+      if (paymentMethod === 'stripe') {
+        try {
+          const paymentRes = await fetch('/api/payment/stripe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              orderId: orderNumber,
+              amount: total,
+              customerEmail: shippingData.email,
+            }),
+          });
+          const paymentResult = await paymentRes.json();
+          if (!paymentResult.success) {
+            throw new Error(paymentResult.message || 'Payment initialization failed');
+          }
+          clearCart();
+          window.location.href = paymentResult.url;
+          return;
+        } catch (paymentErr: any) {
+          console.error('Payment Error:', paymentErr);
+          alert('Failed to initialize payment: ' + paymentErr.message);
+          setIsLoading(false);
+          return;
+        }
+      }
+
+      if (paymentMethod === 'paypal') {
+        try {
+          const paymentRes = await fetch('/api/payment/paypal', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -655,6 +707,46 @@ export default function CheckoutPage() {
                       </div>
                       <i className="ri-smartphone-line text-2xl text-gray-500"></i>
                     </label>
+                    <label
+                      className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-colors ${paymentMethod === 'stripe' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 hover:border-gray-400'
+                        }`}
+                    >
+                      <div className="flex items-center space-x-4">
+                        <input
+                          type="radio"
+                          name="payment"
+                          value="stripe"
+                          checked={paymentMethod === 'stripe'}
+                          onChange={() => setPaymentMethod('stripe')}
+                          className="w-5 h-5 text-gray-900"
+                        />
+                        <div>
+                          <p className="font-semibold text-gray-900">Stripe</p>
+                          <p className="text-sm text-gray-600">Card payments (Visa, Mastercard, etc.)</p>
+                        </div>
+                      </div>
+                      <i className="ri-bank-card-2-line text-2xl text-gray-500"></i>
+                    </label>
+                    <label
+                      className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-colors ${paymentMethod === 'paypal' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 hover:border-gray-400'
+                        }`}
+                    >
+                      <div className="flex items-center space-x-4">
+                        <input
+                          type="radio"
+                          name="payment"
+                          value="paypal"
+                          checked={paymentMethod === 'paypal'}
+                          onChange={() => setPaymentMethod('paypal')}
+                          className="w-5 h-5 text-gray-900"
+                        />
+                        <div>
+                          <p className="font-semibold text-gray-900">PayPal</p>
+                          <p className="text-sm text-gray-600">Pay with PayPal or PayPal balance</p>
+                        </div>
+                      </div>
+                      <i className="ri-paypal-line text-2xl text-gray-500"></i>
+                    </label>
                   </div>
 
                   <div className="flex flex-col-reverse md:flex-row gap-4 mt-6">
@@ -679,7 +771,7 @@ export default function CheckoutPage() {
                           Processing...
                         </>
                       ) : (
-                        paymentMethod === 'paystack' ? 'Pay with Paystack' : 'Pay with Moolre'
+                        paymentMethod === 'paystack' ? 'Pay with Paystack' : paymentMethod === 'moolre' ? 'Pay with Moolre' : paymentMethod === 'stripe' ? 'Pay with Stripe' : 'Pay with PayPal'
                       )}
                     </button>
                   </div>

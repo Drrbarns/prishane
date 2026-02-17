@@ -15,7 +15,7 @@ export default function PaymentPage() {
   const [order, setOrder] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<'paystack' | 'moolre'>('paystack');
+  const [paymentMethod, setPaymentMethod] = useState<'paystack' | 'moolre' | 'stripe' | 'paypal'>('paystack');
   const [error, setError] = useState<string | null>(null);
   const [storeName, setStoreName] = useState('Prishane Hair');
 
@@ -68,7 +68,7 @@ export default function PaymentPage() {
     setProcessing(true);
     setError(null);
 
-    const url = paymentMethod === 'paystack' ? '/api/payment/paystack' : '/api/payment/moolre';
+    const url = paymentMethod === 'paystack' ? '/api/payment/paystack' : paymentMethod === 'moolre' ? '/api/payment/moolre' : paymentMethod === 'stripe' ? '/api/payment/stripe' : '/api/payment/paypal';
     try {
       const paymentRes = await fetch(url, {
         method: 'POST',
@@ -228,6 +228,24 @@ export default function PaymentPage() {
               <span className="font-semibold text-gray-900">Moolre</span>
               <span className="text-xs text-gray-600 block mt-0.5">Mobile Money</span>
             </button>
+            <button
+              type="button"
+              onClick={() => setPaymentMethod('stripe')}
+              className={`p-4 rounded-xl border-2 text-left transition-colors cursor-pointer ${paymentMethod === 'stripe' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}
+            >
+              <i className="ri-bank-card-2-line text-2xl text-gray-700 mb-1 block"></i>
+              <span className="font-semibold text-gray-900">Stripe</span>
+              <span className="text-xs text-gray-600 block mt-0.5">Card (Visa, Mastercard)</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setPaymentMethod('paypal')}
+              className={`p-4 rounded-xl border-2 text-left transition-colors cursor-pointer ${paymentMethod === 'paypal' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}
+            >
+              <i className="ri-paypal-line text-2xl text-gray-700 mb-1 block"></i>
+              <span className="font-semibold text-gray-900">PayPal</span>
+              <span className="text-xs text-gray-600 block mt-0.5">PayPal balance</span>
+            </button>
           </div>
         </div>
 
@@ -248,7 +266,7 @@ export default function PaymentPage() {
           ) : (
             <>
               <i className="ri-secure-payment-line mr-2"></i>
-              Pay GH₵ {order?.total?.toFixed(2)} with {paymentMethod === 'paystack' ? 'Paystack' : 'Moolre'}
+              Pay GH₵ {order?.total?.toFixed(2)} with {paymentMethod === 'paystack' ? 'Paystack' : paymentMethod === 'moolre' ? 'Moolre' : paymentMethod === 'stripe' ? 'Stripe' : 'PayPal'}
             </>
           )}
         </button>
@@ -257,7 +275,7 @@ export default function PaymentPage() {
         <div className="mt-6 text-center">
           <p className="text-xs text-gray-500 flex items-center justify-center">
             <i className="ri-lock-line mr-1"></i>
-            Secure payment · Paystack & Moolre
+            Secure payment · Paystack, Moolre, Stripe & PayPal
           </p>
         </div>
 
