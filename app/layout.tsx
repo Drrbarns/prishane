@@ -4,7 +4,7 @@ import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://localhost:3000';
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://prishanehair.com';
 const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Prishane Hair';
 const siteDescription = process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Your one-stop online store for premium quality products.';
 
@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     "eCommerce",
     "Premium Products",
     "Shop Online",
+    "Hair",
+    "Wigs",
+    "Beauty"
   ],
   robots: {
     index: true,
@@ -35,6 +38,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.png',
     apple: '/favicon.png',
+    shortcut: '/favicon.png',
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
@@ -48,7 +52,7 @@ export const metadata: Metadata = {
     siteName: siteName,
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/logo-large.png",
         width: 1200,
         height: 630,
         alt: siteName,
@@ -59,7 +63,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
-    images: ["/og-image.jpg"],
+    images: ["/logo-large.png"],
   },
   alternates: {
     canonical: siteUrl,
@@ -96,6 +100,7 @@ export default function RootLayout({
               "@type": "Organization",
               "name": siteName,
               "url": siteUrl,
+              "logo": `${siteUrl}/logo.png`,
               "description": siteDescription,
               "contactPoint": {
                 "@type": "ContactPoint",

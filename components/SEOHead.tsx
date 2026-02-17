@@ -15,11 +15,14 @@ interface SEOProps {
   noindex?: boolean;
 }
 
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://prishanehair.com';
+const SITE_NAME = 'Prishane Hair';
+
 export function generateMetadata({
   title = 'Prishane Hair - Premium Hair & Wigs in Ghana',
   description = 'Discover curated premium products with fast delivery across Ghana. Shop fashion, home decor, electronics and more with secure payment and 30-day returns.',
   keywords = [],
-  ogImage = 'https://readdy.ai/api/search-image?query=modern%20premium%20ecommerce%20online%20shopping%20platform%20elegant%20design&width=1200&height=630&seq=ogimage&orientation=landscape',
+  ogImage = '/logo-large.png',
   ogType = 'website',
   price,
   currency = 'GHS',
@@ -29,9 +32,7 @@ export function generateMetadata({
   author,
   noindex = false
 }: SEOProps): Metadata {
-  const siteName = 'Prishane Hair';
-  const siteUrl = 'https://premiumshop.com';
-  const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
+  const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
 
   const defaultKeywords = [
     'online shopping ghana',
@@ -39,7 +40,10 @@ export function generateMetadata({
     'buy online ghana',
     'ecommerce ghana',
     'fast delivery ghana',
-    'secure shopping'
+    'secure shopping',
+    'hair',
+    'wigs',
+    'beauty'
   ];
 
   const allKeywords = [...new Set([...keywords, ...defaultKeywords])];
@@ -54,7 +58,7 @@ export function generateMetadata({
       description,
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
       type: ogType as any,
-      siteName,
+      siteName: SITE_NAME,
       locale: 'en_GH'
     },
     twitter: {
@@ -77,7 +81,7 @@ export function generateMetadata({
       }
     },
     alternates: {
-      canonical: siteUrl
+      canonical: SITE_URL
     }
   };
 
@@ -114,7 +118,7 @@ export function generateProductSchema(product: {
     sku: product.sku,
     brand: {
       '@type': 'Brand',
-      name: product.brand || 'Prishane Hair'
+      name: product.brand || SITE_NAME
     },
     offers: {
       '@type': 'Offer',
@@ -162,9 +166,9 @@ export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Prishane Hair',
-    url: 'https://premiumshop.com',
-    logo: 'https://readdy.ai/api/search-image?query=premium%20shop%20logo%20elegant%20modern&width=200&height=200&seq=logo&orientation=squarish',
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo.png`,
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+233595211414',
@@ -186,13 +190,13 @@ export function generateWebsiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Prishane Hair',
-    url: 'https://premiumshop.com',
+    name: SITE_NAME,
+    url: SITE_URL,
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://premiumshop.com/shop?search={search_term_string}'
+        urlTemplate: `${SITE_URL}/shop?search={search_term_string}`
       },
       'query-input': 'required name=search_term_string'
     }
