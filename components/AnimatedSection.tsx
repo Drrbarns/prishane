@@ -80,7 +80,7 @@ export function AnimatedGrid({
     }
   }, [isInView, controls]);
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -90,7 +90,7 @@ export function AnimatedGrid({
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
