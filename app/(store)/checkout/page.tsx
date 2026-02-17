@@ -666,86 +666,75 @@ export default function CheckoutPage() {
                   </div>
 
                   <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">Payment Method</h2>
-                  <div className="space-y-4">
+                  <p className="text-sm text-gray-600 mb-4">Select how you’d like to pay. All four options are listed below.</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <label
-                      className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-colors ${paymentMethod === 'paystack' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 hover:border-gray-400'
-                        }`}
+                      className={`flex items-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-colors ${paymentMethod === 'paystack' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 hover:border-gray-400'}`}
                     >
-                      <div className="flex items-center space-x-4">
-                        <input
-                          type="radio"
-                          name="payment"
-                          value="paystack"
-                          checked={paymentMethod === 'paystack'}
-                          onChange={() => setPaymentMethod('paystack')}
-                          className="w-5 h-5 text-gray-900"
-                        />
-                        <div>
-                          <p className="font-semibold text-gray-900">Paystack</p>
-                          <p className="text-sm text-gray-600">Card, Mobile Money & more</p>
-                        </div>
+                      <input
+                        type="radio"
+                        name="payment"
+                        value="paystack"
+                        checked={paymentMethod === 'paystack'}
+                        onChange={() => setPaymentMethod('paystack')}
+                        className="w-5 h-5 text-gray-900 flex-shrink-0"
+                      />
+                      <i className="ri-bank-card-line text-xl text-gray-600 flex-shrink-0"></i>
+                      <div className="min-w-0">
+                        <p className="font-semibold text-gray-900">Paystack</p>
+                        <p className="text-xs text-gray-600 truncate">Card & Mobile Money</p>
                       </div>
-                      <i className="ri-bank-card-line text-2xl text-gray-500"></i>
                     </label>
                     <label
-                      className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-colors ${paymentMethod === 'moolre' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 hover:border-gray-400'
-                        }`}
+                      className={`flex items-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-colors ${paymentMethod === 'moolre' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 hover:border-gray-400'}`}
                     >
-                      <div className="flex items-center space-x-4">
-                        <input
-                          type="radio"
-                          name="payment"
-                          value="moolre"
-                          checked={paymentMethod === 'moolre'}
-                          onChange={() => setPaymentMethod('moolre')}
-                          className="w-5 h-5 text-gray-900"
-                        />
-                        <div>
-                          <p className="font-semibold text-gray-900">Moolre</p>
-                          <p className="text-sm text-gray-600">Mobile Money (MTN, Vodafone, AirtelTigo)</p>
-                        </div>
+                      <input
+                        type="radio"
+                        name="payment"
+                        value="moolre"
+                        checked={paymentMethod === 'moolre'}
+                        onChange={() => setPaymentMethod('moolre')}
+                        className="w-5 h-5 text-gray-900 flex-shrink-0"
+                      />
+                      <i className="ri-smartphone-line text-xl text-gray-600 flex-shrink-0"></i>
+                      <div className="min-w-0">
+                        <p className="font-semibold text-gray-900">Moolre</p>
+                        <p className="text-xs text-gray-600 truncate">Mobile Money</p>
                       </div>
-                      <i className="ri-smartphone-line text-2xl text-gray-500"></i>
                     </label>
                     <label
-                      className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-colors ${paymentMethod === 'stripe' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 hover:border-gray-400'
-                        }`}
+                      className={`flex items-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-colors ${paymentMethod === 'stripe' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 hover:border-gray-400'}`}
                     >
-                      <div className="flex items-center space-x-4">
-                        <input
-                          type="radio"
-                          name="payment"
-                          value="stripe"
-                          checked={paymentMethod === 'stripe'}
-                          onChange={() => setPaymentMethod('stripe')}
-                          className="w-5 h-5 text-gray-900"
-                        />
-                        <div>
-                          <p className="font-semibold text-gray-900">Stripe</p>
-                          <p className="text-sm text-gray-600">Card payments (Visa, Mastercard, etc.)</p>
-                        </div>
+                      <input
+                        type="radio"
+                        name="payment"
+                        value="stripe"
+                        checked={paymentMethod === 'stripe'}
+                        onChange={() => setPaymentMethod('stripe')}
+                        className="w-5 h-5 text-gray-900 flex-shrink-0"
+                      />
+                      <i className="ri-bank-card-2-line text-xl text-gray-600 flex-shrink-0"></i>
+                      <div className="min-w-0">
+                        <p className="font-semibold text-gray-900">Stripe</p>
+                        <p className="text-xs text-gray-600 truncate">Card (Visa, Mastercard)</p>
                       </div>
-                      <i className="ri-bank-card-2-line text-2xl text-gray-500"></i>
                     </label>
                     <label
-                      className={`flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-colors ${paymentMethod === 'paypal' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 hover:border-gray-400'
-                        }`}
+                      className={`flex items-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-colors ${paymentMethod === 'paypal' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 hover:border-gray-400'}`}
                     >
-                      <div className="flex items-center space-x-4">
-                        <input
-                          type="radio"
-                          name="payment"
-                          value="paypal"
-                          checked={paymentMethod === 'paypal'}
-                          onChange={() => setPaymentMethod('paypal')}
-                          className="w-5 h-5 text-gray-900"
-                        />
-                        <div>
-                          <p className="font-semibold text-gray-900">PayPal</p>
-                          <p className="text-sm text-gray-600">Pay with PayPal or PayPal balance</p>
-                        </div>
+                      <input
+                        type="radio"
+                        name="payment"
+                        value="paypal"
+                        checked={paymentMethod === 'paypal'}
+                        onChange={() => setPaymentMethod('paypal')}
+                        className="w-5 h-5 text-gray-900 flex-shrink-0"
+                      />
+                      <i className="ri-paypal-line text-xl text-gray-600 flex-shrink-0"></i>
+                      <div className="min-w-0">
+                        <p className="font-semibold text-gray-900">PayPal</p>
+                        <p className="text-xs text-gray-600 truncate">PayPal balance</p>
                       </div>
-                      <i className="ri-paypal-line text-2xl text-gray-500"></i>
                     </label>
                   </div>
 

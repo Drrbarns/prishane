@@ -206,45 +206,53 @@ export default function PaymentPage() {
           </div>
         )}
 
-        {/* Payment method choice */}
-        <div className="mb-6">
-          <p className="text-sm font-semibold text-gray-900 mb-3">Choose payment method</p>
-          <div className="grid grid-cols-2 gap-3">
+        {/* Payment method choice - all 4 options in one card */}
+        <div className="mb-6 bg-white rounded-xl shadow-sm p-6">
+          <h2 className="text-base font-bold text-gray-900 mb-4">Choose payment method</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               type="button"
               onClick={() => setPaymentMethod('paystack')}
-              className={`p-4 rounded-xl border-2 text-left transition-colors cursor-pointer ${paymentMethod === 'paystack' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}
+              className={`flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-colors cursor-pointer ${paymentMethod === 'paystack' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}
             >
-              <i className="ri-bank-card-line text-2xl text-gray-700 mb-1 block"></i>
-              <span className="font-semibold text-gray-900">Paystack</span>
-              <span className="text-xs text-gray-600 block mt-0.5">Card & Mobile Money</span>
+              <i className="ri-bank-card-line text-2xl text-gray-700 flex-shrink-0"></i>
+              <div>
+                <span className="font-semibold text-gray-900 block">Paystack</span>
+                <span className="text-xs text-gray-600">Card & Mobile Money</span>
+              </div>
             </button>
             <button
               type="button"
               onClick={() => setPaymentMethod('moolre')}
-              className={`p-4 rounded-xl border-2 text-left transition-colors cursor-pointer ${paymentMethod === 'moolre' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}
+              className={`flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-colors cursor-pointer ${paymentMethod === 'moolre' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}
             >
-              <i className="ri-smartphone-line text-2xl text-gray-700 mb-1 block"></i>
-              <span className="font-semibold text-gray-900">Moolre</span>
-              <span className="text-xs text-gray-600 block mt-0.5">Mobile Money</span>
+              <i className="ri-smartphone-line text-2xl text-gray-700 flex-shrink-0"></i>
+              <div>
+                <span className="font-semibold text-gray-900 block">Moolre</span>
+                <span className="text-xs text-gray-600">Mobile Money</span>
+              </div>
             </button>
             <button
               type="button"
               onClick={() => setPaymentMethod('stripe')}
-              className={`p-4 rounded-xl border-2 text-left transition-colors cursor-pointer ${paymentMethod === 'stripe' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}
+              className={`flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-colors cursor-pointer ${paymentMethod === 'stripe' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}
             >
-              <i className="ri-bank-card-2-line text-2xl text-gray-700 mb-1 block"></i>
-              <span className="font-semibold text-gray-900">Stripe</span>
-              <span className="text-xs text-gray-600 block mt-0.5">Card (Visa, Mastercard)</span>
+              <i className="ri-bank-card-2-line text-2xl text-gray-700 flex-shrink-0"></i>
+              <div>
+                <span className="font-semibold text-gray-900 block">Stripe</span>
+                <span className="text-xs text-gray-600">Card (Visa, Mastercard)</span>
+              </div>
             </button>
             <button
               type="button"
               onClick={() => setPaymentMethod('paypal')}
-              className={`p-4 rounded-xl border-2 text-left transition-colors cursor-pointer ${paymentMethod === 'paypal' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}
+              className={`flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-colors cursor-pointer ${paymentMethod === 'paypal' ? 'border-gray-900 bg-gray-50' : 'border-gray-200 hover:border-gray-300'}`}
             >
-              <i className="ri-paypal-line text-2xl text-gray-700 mb-1 block"></i>
-              <span className="font-semibold text-gray-900">PayPal</span>
-              <span className="text-xs text-gray-600 block mt-0.5">PayPal balance</span>
+              <i className="ri-paypal-line text-2xl text-gray-700 flex-shrink-0"></i>
+              <div>
+                <span className="font-semibold text-gray-900 block">PayPal</span>
+                <span className="text-xs text-gray-600">PayPal balance</span>
+              </div>
             </button>
           </div>
         </div>
