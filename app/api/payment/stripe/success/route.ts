@@ -26,7 +26,7 @@ export async function GET(req: Request) {
       return NextResponse.redirect(new URL(`/pay/${orderNumber}?error=config`, req.url));
     }
 
-    const stripe = new Stripe(secretKey, { apiVersion: '2024-11-20.acacia' });
+    const stripe = new Stripe(secretKey);
     const session = await stripe.checkout.sessions.retrieve(sessionId, { expand: ['payment_intent'] });
 
     if (session.payment_status !== 'paid') {

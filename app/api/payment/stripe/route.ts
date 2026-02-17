@@ -41,7 +41,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, message: isGhs ? 'Amount too small (min GH₵0.10)' : 'Amount too small (min $0.50)' }, { status: 400 });
     }
 
-    const stripe = new Stripe(secretKey, { apiVersion: '2024-11-20.acacia' });
+    const stripe = new Stripe(secretKey);
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
