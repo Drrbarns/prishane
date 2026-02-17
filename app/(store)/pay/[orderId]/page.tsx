@@ -17,7 +17,7 @@ export default function PaymentPage() {
   const [processing, setProcessing] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<'paystack' | 'moolre'>('paystack');
   const [error, setError] = useState<string | null>(null);
-  const [storeName, setStoreName] = useState('My Store');
+  const [storeName, setStoreName] = useState('Prishane Hair');
 
   useEffect(() => {
     // Fetch store name

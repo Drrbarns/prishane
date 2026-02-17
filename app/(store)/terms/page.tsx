@@ -18,7 +18,7 @@ export default function TermsPage() {
           <section className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">1. Agreement to Terms</h2>
             <p className="text-gray-600 leading-relaxed mb-4">
-              By accessing and using this website (premiumstore.com), you accept and agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use our website or services.
+              By accessing and using this website, you accept and agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use our website or services.
             </p>
             <p className="text-gray-600 leading-relaxed">
               These terms apply to all visitors, users, and customers who access or use our service. We reserve the right to update or modify these terms at any time without prior notice. Your continued use of the website following any changes indicates your acceptance of the new terms.
@@ -292,7 +292,7 @@ export default function TermsPage() {
                   <i className="ri-mail-line text-gray-900 text-xl mt-1"></i>
                   <div>
                     <p className="font-medium text-gray-900">Email</p>
-                    <a href="mailto:legal@premiumstore.com" className="text-gray-900 hover:underline">legal@premiumstore.com</a>
+                    <a href="mailto:prishanehair@gmail.com" className="text-gray-900 hover:underline">prishanehair@gmail.com</a>
                   </div>
                 </div>
 
@@ -300,7 +300,7 @@ export default function TermsPage() {
                   <i className="ri-phone-line text-gray-900 text-xl mt-1"></i>
                   <div>
                     <p className="font-medium text-gray-900">Phone</p>
-                    <a href="tel:+233241234567" className="text-gray-900 hover:underline">+233 24 123 4567</a>
+                    <a href="tel:+233595211414" className="text-gray-900 hover:underline">0595211414</a>
                   </div>
                 </div>
 

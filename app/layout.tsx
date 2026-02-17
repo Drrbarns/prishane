@@ -5,7 +5,7 @@ import { WishlistProvider } from "@/context/WishlistContext";
 import "./globals.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://localhost:3000';
-const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'My Store';
+const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Prishane Hair';
 const siteDescription = process.env.NEXT_PUBLIC_SITE_DESCRIPTION || 'Your one-stop online store for premium quality products.';
 
 export const metadata: Metadata = {

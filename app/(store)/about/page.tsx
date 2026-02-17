@@ -1,25 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
 import { useCMS } from '@/context/CMSContext';
-import PageHero from '@/components/PageHero';
 import { usePageTitle } from '@/hooks/usePageTitle';
 
 export default function AboutPage() {
   usePageTitle('Our Story');
   const { getSetting } = useCMS();
-  const [activeTab, setActiveTab] = useState('story');
 
-  const siteName = getSetting('site_name') || 'Our Store';
-  const primaryColor = getSetting('primary_color') || '#000000';
-
+  const siteName = getSetting('site_name') || 'Prishane Hair';
+  
   // CMS-driven content
   const heroTitle = getSetting('about_hero_title') || 'Our Story';
-  const heroSubtitle = getSetting('about_hero_subtitle') || 'Learn about who we are and what we do.';
+  const heroSubtitle = getSetting('about_hero_subtitle') || 'A journey of passion, quality, and beauty.';
   const storyTitle = getSetting('about_story_title') || 'From Passion to Business';
   const storyContent = getSetting('about_story_content') || '';
-  const storyImage = getSetting('about_story_image') || '/about.jpg';
+  const storyImage = getSetting('about_story_image') || 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=2669&auto=format&fit=crop';
   const founderName = getSetting('about_founder_name') || 'Founder';
   const founderTitle = getSetting('about_founder_title') || 'CEO';
   const mission1Title = getSetting('about_mission1_title') || 'Direct Sourcing';
@@ -58,39 +54,55 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      <PageHero
-        title={heroTitle}
-        subtitle={heroSubtitle}
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex border-b border-gray-200 mb-12 justify-center">
-          <button
-            onClick={() => setActiveTab('story')}
-            className={`px-8 py-4 font-medium transition-colors text-lg cursor-pointer ${activeTab === 'story'
-              ? 'text-gray-900 border-b-4 border-gray-900 font-bold'
-              : 'text-gray-500 hover:text-gray-700'
-              }`}
-          >
-            Our Story
-          </button>
-          <button
-            onClick={() => setActiveTab('mission')}
-            className={`px-8 py-4 font-medium transition-colors text-lg cursor-pointer ${activeTab === 'mission'
-              ? 'text-gray-900 border-b-4 border-gray-900 font-bold'
-              : 'text-gray-500 hover:text-gray-700'
-              }`}
-          >
-            Our Mission
-          </button>
+    <div className="min-h-screen bg-white font-sans">
+      <div className="bg-gray-900 text-white pb-32 lg:pb-48 pt-24 lg:pt-32 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-35">
+           <img 
+            src={storyImage} 
+            alt="About Background" 
+            className="w-full h-full object-cover"
+            onError={(e) => { const t = e.currentTarget; if (t.src !== '/about.jpg') t.src = '/about.jpg'; }}
+          />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 to-gray-900"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">{heroTitle}</h1>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed font-light">
+            {heroSubtitle}
+          </p>
+        </div>
+      </div>
 
-        {activeTab === 'story' && (
-          <div className="grid md:grid-cols-2 gap-16 items-center animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">{storyTitle}</h2>
-              <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
+      {/* Story Section - Scrolling Narrative */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-24 lg:-mt-32 relative z-20 pb-24">
+        <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 border border-gray-100">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            <div className="order-2 lg:order-1 relative">
+              <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] lg:aspect-[3/4]">
+                <img
+                  src={storyImage}
+                  alt={`${founderName} - ${founderTitle}`}
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  onError={(e) => { const t = e.currentTarget; if (t.src !== '/about.jpg') t.src = '/about.jpg'; }}
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 lg:p-12 text-white">
+                  <p className="font-bold text-2xl mb-1">{founderName}</p>
+                  <p className="text-gray-300 font-medium tracking-wide uppercase text-sm">{founderTitle}</p>
+                </div>
+              </div>
+              
+              {/* Decorative Elements */}
+              <div className="absolute -top-12 -left-12 w-64 h-64 bg-gray-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
+              <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-gray-200 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+            </div>
+            
+            <div className="order-1 lg:order-2">
+              <span className="inline-block py-1 px-3 rounded-full bg-gray-100 text-gray-900 text-sm font-bold mb-6 tracking-wide uppercase">
+                Our Beginning
+              </span>
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">{storyTitle}</h2>
+              <div className="space-y-6 text-lg text-gray-600 leading-relaxed font-light">
                 {storyParagraphs.length > 0 ? (
                   storyParagraphs.map((p: string, i: number) => <p key={i}>{p}</p>)
                 ) : (
@@ -102,92 +114,100 @@ export default function AboutPage() {
                       By sourcing directly and cutting out middlemen, we pass the savings on to our customers while maintaining the highest quality standards.
                     </p>
                     <p>
-                      <strong>{siteName}</strong> was born from this commitment to quality, value, and community.
+                      <strong>{siteName}</strong> was born from this commitment to quality, value, and community. We believe that everyone deserves to feel beautiful and confident.
                     </p>
                   </>
                 )}
               </div>
             </div>
-            <div className="relative">
-              <div className="aspect-[4/3] max-h-[420px] rounded-2xl overflow-hidden shadow-2xl bg-gray-100 relative">
-                <img
-                  src={storyImage}
-                  alt={`${founderName} - ${founderTitle}`}
-                  className="w-full h-full object-cover"
-                  onError={(e) => { const t = e.currentTarget; if (t.src !== '/about.jpg') t.src = '/about.jpg'; }}
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
-                  <p className="text-white font-bold text-xl">{founderName}</p>
-                  <p className="text-gray-200">{founderTitle}</p>
-                </div>
-              </div>
-              {/* Decorative Element */}
-              <div className="absolute -z-10 top-10 -right-10 w-full h-full border-4 border-gray-100 rounded-2xl hidden md:block"></div>
-            </div>
           </div>
-        )}
+        </div>
+      </section>
 
-        {activeTab === 'mission' && (
-          <div className="grid md:grid-cols-2 gap-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <div className="bg-gray-50 p-10 rounded-3xl border border-gray-100">
-              <div className="w-16 h-16 bg-gray-900 rounded-2xl flex items-center justify-center mb-8 shadow-lg">
+      {/* Mission Section - Split Cards */}
+      <section className="bg-gray-50 py-24 lg:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-20">
+            <span className="text-gray-500 font-medium tracking-widest uppercase text-sm mb-3 block">Our Mission</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">What Drives Us Forward</h2>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            <div className="bg-white p-10 lg:p-14 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 group">
+              <div className="w-16 h-16 bg-gray-900 rounded-2xl flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform duration-300">
                 <i className="ri-plane-line text-3xl text-white"></i>
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">{mission1Title}</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">{mission1Title}</h3>
               <p className="text-gray-600 text-lg leading-relaxed">
                 {mission1Content || 'We believe in going to the source. By visiting manufacturers directly, we eliminate middlemen who inflate prices. This hands-on approach guarantees that you aren\'t paying for invisible markups—just great products.'}
               </p>
             </div>
-            <div className="bg-amber-50 p-10 rounded-3xl border border-amber-100">
-              <div className="w-16 h-16 bg-amber-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg">
+            
+            <div className="bg-gray-900 p-10 lg:p-14 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 group text-white">
+              <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-8 shadow-inner group-hover:scale-110 transition-transform duration-300">
                 <i className="ri-heart-line text-3xl text-white"></i>
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">{mission2Title}</h3>
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <h3 className="text-2xl font-bold mb-4">{mission2Title}</h3>
+              <p className="text-gray-300 text-lg leading-relaxed">
                 {mission2Content || '"Luxury" shouldn\'t be exclusive. Our mission is to democratize access to quality goods. Whether it\'s skincare, fashion, or home essentials, we believe everyone deserves the best, regardless of their budget.'}
               </p>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      </section>
 
-      {/* Values Section */}
-      <div className="bg-gray-50 py-24">
+      {/* Values Section - Grid */}
+      <section className="py-24 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{valuesTitle}</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">{valuesSubtitle}</p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">{valuesTitle}</h2>
+              <p className="text-xl text-gray-600">{valuesSubtitle}</p>
+            </div>
+            <Link href="/shop" className="inline-flex items-center gap-2 text-gray-900 font-bold hover:gap-4 transition-all">
+              Start Shopping <i className="ri-arrow-right-line"></i>
+            </Link>
           </div>
+          
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
-              <div key={index} className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mb-6">
-                  <i className={`${value.icon} text-2xl text-gray-900`}></i>
+              <div key={index} className="bg-gray-50 p-8 rounded-2xl hover:bg-white hover:shadow-xl transition-all duration-300 border border-transparent hover:border-gray-100 group">
+                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm group-hover:bg-gray-900 transition-colors duration-300">
+                  <i className={`${value.icon} text-2xl text-gray-900 group-hover:text-white transition-colors duration-300`}></i>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                <p className="text-gray-600 leading-relaxed text-sm">{value.description}</p>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* CTA */}
-      <div className="bg-gray-900 py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">{ctaTitle}</h2>
-          <p className="text-xl text-gray-100 mb-10 leading-relaxed max-w-2xl mx-auto">
+      {/* CTA Section */}
+      <section className="py-24 bg-gray-900 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <img 
+            src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=2669&auto=format&fit=crop" 
+            alt="Background" 
+            className="w-full h-full object-cover grayscale"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/90 to-gray-900/80"></div>
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tight">{ctaTitle}</h2>
+          <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed font-light max-w-2xl mx-auto">
             {ctaSubtitle}
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-3 bg-white text-gray-900 px-10 py-5 rounded-full font-bold text-lg hover:bg-gray-50 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all"
+            className="inline-flex items-center gap-3 bg-white text-gray-900 px-10 py-5 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg hover:shadow-white/20 transform hover:-translate-y-1"
           >
             Start Shopping
             <i className="ri-arrow-right-line"></i>
           </Link>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

@@ -21,7 +21,7 @@ export default function AdminLayout({
 
   // Module Filtering State
   const [enabledModules, setEnabledModules] = useState<string[]>([]);
-  const [storeName, setStoreName] = useState('My Store');
+  const [storeName, setStoreName] = useState('Prishane Hair');
   const [storeLogo, setStoreLogo] = useState<string | null>(null);
 
   useEffect(() => {

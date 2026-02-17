@@ -8,6 +8,7 @@ import { useCMS } from '@/context/CMSContext';
 import ProductCard, { type ColorVariant, getColorHex } from '@/components/ProductCard';
 import AnimatedSection, { AnimatedGrid } from '@/components/AnimatedSection';
 import { usePageTitle } from '@/hooks/usePageTitle';
+import { motion } from 'framer-motion';
 
 export default function Home() {
   usePageTitle('');
@@ -85,7 +86,7 @@ export default function Home() {
   const renderBanners = () => {
     if (activeBanners.length === 0) return null;
     return (
-      <div className="bg-gray-900 text-white py-2 overflow-hidden relative">
+      <div className="bg-gray-900 text-white py-2 overflow-hidden relative z-50">
         <div className="flex animate-marquee whitespace-nowrap">
           {activeBanners.concat(activeBanners).map((banner, index) => (
             <span key={index} className="mx-8 text-sm font-medium tracking-wide flex items-center">
@@ -98,11 +99,11 @@ export default function Home() {
   };
 
   return (
-    <main className="flex-col items-center justify-between min-h-screen">
+    <main className="flex-col items-center justify-between min-h-screen bg-white">
       {renderBanners()}
 
       {/* Hero Section — Video or image background (mobile-responsive) */}
-      <section className="relative w-full min-h-[70vh] xs:min-h-[80vh] sm:min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-end overflow-hidden">
+      <section className="relative w-full min-h-[70vh] xs:min-h-[80vh] sm:min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-end overflow-hidden group">
         {/* Background: video when URL is set, else image */}
         <div className="absolute inset-0 z-0">
           {heroVideo ? (
@@ -112,7 +113,7 @@ export default function Home() {
               loop
               playsInline
               preload="auto"
-              className="absolute inset-0 w-full h-full object-cover object-center"
+              className="absolute inset-0 w-full h-full object-cover object-center scale-105 group-hover:scale-100 transition-transform duration-[2s]"
               poster={heroImage}
               style={{ willChange: 'transform' }}
             >
@@ -122,89 +123,121 @@ export default function Home() {
             <Image
               src={heroImage}
               fill
-              className="object-cover"
+              className="object-cover scale-105 group-hover:scale-100 transition-transform duration-[2s]"
               alt="Hero background"
               priority
               sizes="100vw"
               quality={80}
             />
           )}
-          <div className="absolute inset-0 bg-black/50" aria-hidden />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30" aria-hidden />
         </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-16 sm:pb-20 lg:pb-24 pt-24 text-center">
           {heroTagText && (
-            <p className="text-white/90 text-sm font-semibold tracking-widest uppercase mb-4 animate-fade-in-up">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-white/90 text-sm font-bold tracking-[0.2em] uppercase mb-6 inline-block px-4 py-1 border border-white/30 rounded-full backdrop-blur-sm"
+            >
               {heroTagText}
-            </p>
+            </motion.p>
           )}
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-4 lg:mb-6 max-w-4xl mx-auto drop-shadow-md animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight mb-6 lg:mb-8 max-w-5xl mx-auto drop-shadow-2xl"
+          >
             {heroHeadline}
-          </h1>
-          <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto mb-8 lg:mb-10 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto mb-10 lg:mb-12 font-light leading-relaxed"
+          >
             {heroSubheadline}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
             <Link
               href={heroPrimaryLink}
-              className="inline-flex items-center justify-center bg-white text-gray-900 hover:bg-gray-100 px-8 py-4 rounded-full font-medium text-lg transition-colors"
+              className="inline-flex items-center justify-center bg-white text-gray-900 hover:bg-gray-100 px-10 py-4 rounded-full font-bold text-lg transition-all hover:scale-105 shadow-lg hover:shadow-white/20"
             >
               {heroPrimaryText}
             </Link>
             {heroSecondaryText && (
               <Link
                 href={heroSecondaryLink}
-                className="inline-flex items-center justify-center border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-full font-medium text-lg transition-colors"
+                className="inline-flex items-center justify-center border border-white/40 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-gray-900 px-10 py-4 rounded-full font-bold text-lg transition-all hover:scale-105"
               >
                 {heroSecondaryText}
               </Link>
             )}
-          </div>
+          </motion.div>
+          
           {/* Stats — desktop */}
-          <div className="mt-12 pt-8 border-t border-white/20 hidden lg:flex justify-center gap-12">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 1 }}
+            className="mt-16 pt-8 border-t border-white/10 hidden lg:flex justify-center gap-16"
+          >
             <div className="text-center">
-              <p className="font-serif font-bold text-white text-lg">{stat1Title}</p>
-              <p className="text-sm text-white/80">{stat1Desc}</p>
+              <p className="font-serif font-bold text-white text-2xl mb-1">{stat1Title}</p>
+              <p className="text-sm text-white/60 uppercase tracking-wider">{stat1Desc}</p>
             </div>
             <div className="text-center">
-              <p className="font-serif font-bold text-white text-lg">{stat2Title}</p>
-              <p className="text-sm text-white/80">{stat2Desc}</p>
+              <p className="font-serif font-bold text-white text-2xl mb-1">{stat2Title}</p>
+              <p className="text-sm text-white/60 uppercase tracking-wider">{stat2Desc}</p>
             </div>
             <div className="text-center">
-              <p className="font-serif font-bold text-white text-lg">{stat3Title}</p>
-              <p className="text-sm text-white/80">{stat3Desc}</p>
+              <p className="font-serif font-bold text-white text-2xl mb-1">{stat3Title}</p>
+              <p className="text-sm text-white/60 uppercase tracking-wider">{stat3Desc}</p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Optional floating badge (desktop only) */}
         {heroBadgeLabel && (
-          <div className="hidden md:block absolute bottom-8 left-4 sm:left-8 lg:left-12 z-10 bg-white/95 backdrop-blur rounded-2xl p-4 sm:p-5 shadow-xl max-w-[220px] animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <p className="font-serif text-gray-800 text-sm italic mb-0.5">{heroBadgeLabel}</p>
-            <p className="text-2xl font-bold text-gray-900">{heroBadgeText}</p>
-            <p className="text-sm text-gray-600">{heroBadgeSubtext}</p>
-          </div>
+          <motion.div 
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 1, duration: 0.8 }}
+            className="hidden md:block absolute bottom-12 left-12 z-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-2xl max-w-[240px]"
+          >
+            <p className="font-serif text-white/80 text-sm italic mb-1">{heroBadgeLabel}</p>
+            <p className="text-3xl font-bold text-white mb-1">{heroBadgeText}</p>
+            <p className="text-xs text-white/60 uppercase tracking-wider">{heroBadgeSubtext}</p>
+          </motion.div>
         )}
       </section>
 
       {/* Categories Section */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <AnimatedSection className="flex items-end justify-between mb-12">
             <div>
+              <span className="text-gray-500 font-bold tracking-widest uppercase text-xs mb-3 block">Collections</span>
               <h2 className="font-serif text-4xl md:text-5xl text-gray-900 mb-4">Shop by Category</h2>
-              <p className="text-gray-600 text-lg max-w-md">Explore our carefully curated collections</p>
+              <p className="text-gray-600 text-lg max-w-md font-light">Explore our carefully curated collections designed for every style.</p>
             </div>
-            <Link href="/categories" className="hidden md:flex items-center text-gray-800 font-medium hover:text-gray-900 transition-colors">
-              View All <i className="ri-arrow-right-line ml-2"></i>
+            <Link href="/categories" className="hidden md:flex items-center gap-2 text-gray-900 font-bold hover:gap-4 transition-all">
+              View All <i className="ri-arrow-right-line"></i>
             </Link>
           </AnimatedSection>
 
           <AnimatedGrid className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {categories.map((category) => (
               <Link href={`/shop?category=${category.slug}`} key={category.id} className="group cursor-pointer block">
-                <div className="aspect-[3/4] rounded-2xl overflow-hidden mb-4 relative shadow-md">
+                <div className="aspect-[3/4] rounded-3xl overflow-hidden mb-4 relative shadow-sm hover:shadow-xl transition-all duration-500">
                   <Image
                     src={category.image || category.image_url || 'https://via.placeholder.com/600x800?text=' + encodeURIComponent(category.name)}
                     alt={category.name}
@@ -213,19 +246,22 @@ export default function Home() {
                     sizes="(max-width: 768px) 50vw, 25vw"
                     quality={75}
                   />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                  <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm p-4 rounded-xl text-center transform translate-y-2 opacity-90 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                    <h3 className="font-serif font-bold text-gray-900 text-lg">{category.name}</h3>
-                    <span className="text-xs text-gray-800 font-medium uppercase tracking-wider mt-1 block">View Collection</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="font-serif font-bold text-xl mb-1">{category.name}</h3>
+                    <div className="flex items-center gap-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      <span>Explore</span>
+                      <i className="ri-arrow-right-line"></i>
+                    </div>
                   </div>
                 </div>
               </Link>
             ))}
           </AnimatedGrid>
 
-          <div className="mt-8 text-center md:hidden">
-            <Link href="/categories" className="inline-flex items-center text-gray-800 font-medium hover:text-gray-900 transition-colors">
-              View All <i className="ri-arrow-right-line ml-2"></i>
+          <div className="mt-12 text-center md:hidden">
+            <Link href="/categories" className="inline-flex items-center gap-2 text-gray-900 font-bold">
+              View All <i className="ri-arrow-right-line"></i>
             </Link>
           </div>
         </div>
@@ -235,15 +271,16 @@ export default function Home() {
       <section className="py-24 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-16">
+            <span className="text-gray-500 font-bold tracking-widest uppercase text-xs mb-3 block">New Arrivals</span>
             <h2 className="font-serif text-4xl md:text-5xl text-gray-900 mb-4">Featured Products</h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Handpicked for you</p>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto font-light">Handpicked favorites just for you.</p>
           </AnimatedSection>
 
           {loading ? (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="animate-pulse">
-                  <div className="bg-gray-200 aspect-[3/4] rounded-xl mb-4"></div>
+                  <div className="bg-gray-200 aspect-[3/4] rounded-2xl mb-4"></div>
                   <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
                   <div className="h-4 bg-gray-200 rounded w-1/2"></div>
                 </div>
@@ -296,28 +333,28 @@ export default function Home() {
             </AnimatedGrid>
           )}
 
-          <div className="text-center mt-16">
+          <div className="text-center mt-20">
             <Link
               href="/shop"
-              className="inline-flex items-center justify-center bg-gray-900 text-white px-10 py-4 rounded-full font-medium hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 btn-animate"
+              className="inline-flex items-center justify-center bg-gray-900 text-white px-12 py-5 rounded-full font-bold text-lg hover:bg-gray-800 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1"
             >
-              View All Products
+              Shop All Products
             </Link>
           </div>
         </div>
       </section>
 
       {/* Trust Features */}
-      <section className="py-16 bg-white border-t border-gray-100">
+      <section className="py-24 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {features.map((feature, i) => (
-              <AnimatedSection key={i} delay={i * 100} className="flex flex-col items-center text-center p-4">
-                <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-4 text-gray-900">
+              <AnimatedSection key={i} delay={i * 0.1} className="flex flex-col items-center text-center group">
+                <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-6 text-gray-900 group-hover:bg-gray-900 group-hover:text-white transition-colors duration-500">
                   <i className={`${feature.icon} text-3xl`}></i>
                 </div>
-                <h3 className="font-bold text-gray-900 mb-1">{feature.title}</h3>
-                <p className="text-gray-500 text-sm">{feature.desc}</p>
+                <h3 className="font-bold text-gray-900 mb-2 text-lg">{feature.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{feature.desc}</p>
               </AnimatedSection>
             ))}
           </div>

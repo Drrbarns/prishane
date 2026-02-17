@@ -183,21 +183,21 @@ export interface CMSContextType {
 
 // ── Defaults ───────────────────────────────────────────────────────
 export const defaultSettings: SiteSettings = {
-    // General — DEQUEENSCROWN HAIRS
-    site_name: 'DEQUEENSCROWN HAIRS',
+    // General — Prishane Hair
+    site_name: 'Prishane Hair',
     site_tagline: 'Premium human hair & wigs, made for queens.',
     site_logo: '/logo.png',
     site_favicon: '/favicon.ico',
-    contact_email: 'dequeenscrownhair@gmail.com',
-    contact_phone: '0204292019',
-    contact_address: 'Ghana',
+    contact_email: 'prishanehair@gmail.com',
+    contact_phone: '0595211414',
+    contact_address: 'Oak villa Estate, GE 021-8577',
     social_facebook: '',
-    social_instagram: 'https://www.instagram.com/de_queens_crown_hairs?igsh=anRyMHoybjgzYzJt',
+    social_instagram: '',
     social_twitter: '',
-    social_tiktok: 'https://www.tiktok.com/@de_queenscrownhair?_r=1&_t=ZT-93pSK4ZI97N',
+    social_tiktok: '',
     social_youtube: '',
-    social_snapchat: 'https://www.snapchat.com/add/de_queenscrown?share_id=ozGgV0X-xMY&locale=en-GB',
-    social_whatsapp: '0204292019',
+    social_snapchat: '',
+    social_whatsapp: '0595211414',
     currency: 'GHS',
     currency_symbol: 'GH₵',
 
@@ -244,19 +244,19 @@ export const defaultSettings: SiteSettings = {
     feature4_title: 'Secure Payment',
     feature4_desc: 'Safe checkout',
 
-    // About — DEQUEENSCROWN HAIRS
+    // About — Prishane Hair
     about_hero_title: 'Our Story',
     about_hero_subtitle: 'Where quality hair meets the crown you deserve.',
     about_story_title: 'Built for Queens, by a Queen',
-    about_story_content: 'De Queen\'s Crown Hairs started from a simple belief: every woman deserves to feel like royalty—without compromise on quality or style.\n\nWe source premium human hair and create wigs that look and feel like your own. No shortcuts, no synthetic substitutes where it matters. Just honest quality you can trust.\n\nWhether you\'re after a bold new look or a seamless everyday style, we\'re here to help you crown it.',
+    about_story_content: 'Prishane Hair started from a simple belief: every woman deserves to feel like royalty—without compromise on quality or style.\n\nWe source premium human hair and create wigs that look and feel like your own. No shortcuts, no synthetic substitutes where it matters. Just honest quality you can trust.\n\nWhether you\'re after a bold new look or a seamless everyday style, we\'re here to help you crown it.',
     about_story_image: '/about-wig.png',
-    about_founder_name: 'De Queen\'s Crown Hairs',
+    about_founder_name: 'Prishane Hair',
     about_founder_title: 'Premium Hair & Wigs',
     about_mission1_title: 'Real Hair, Real Quality',
     about_mission1_content: 'We work with trusted suppliers to bring you 100% human hair—no mix-ups, no false claims. Every piece is chosen for texture, longevity, and that natural look you deserve.',
     about_mission2_title: 'Style That Fits Your Life',
     about_mission2_content: 'From sleek bobs to flowing lengths, we offer styles that match how you live. Our goal is to make premium hair accessible so you can switch it up whenever you want, with confidence.',
-    about_values_title: 'Why Choose De Queen\'s Crown?',
+    about_values_title: 'Why Choose Prishane Hair?',
     about_values_subtitle: 'Quality you can see, trust you can feel.',
     about_cta_title: 'Ready to Find Your Crown?',
     about_cta_subtitle: 'Explore our collection and discover the piece that’s made for you.',
@@ -270,7 +270,7 @@ export const defaultSettings: SiteSettings = {
     contact_team_json: '[]',
 
     // Header
-    header_logo_height: '40',
+    header_logo_height: '56',
     header_nav_links_json: JSON.stringify([
         { label: 'Shop', href: '/shop' },
         { label: 'Categories', href: '/categories' },

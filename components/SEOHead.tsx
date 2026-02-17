@@ -16,7 +16,7 @@ interface SEOProps {
 }
 
 export function generateMetadata({
-  title = 'Premium Online Shopping in Ghana',
+  title = 'Prishane Hair - Premium Hair & Wigs in Ghana',
   description = 'Discover curated premium products with fast delivery across Ghana. Shop fashion, home decor, electronics and more with secure payment and 30-day returns.',
   keywords = [],
   ogImage = 'https://readdy.ai/api/search-image?query=modern%20premium%20ecommerce%20online%20shopping%20platform%20elegant%20design&width=1200&height=630&seq=ogimage&orientation=landscape',
@@ -29,7 +29,7 @@ export function generateMetadata({
   author,
   noindex = false
 }: SEOProps): Metadata {
-  const siteName = 'PremiumShop Ghana';
+  const siteName = 'Prishane Hair';
   const siteUrl = 'https://premiumshop.com';
   const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
 
@@ -114,7 +114,7 @@ export function generateProductSchema(product: {
     sku: product.sku,
     brand: {
       '@type': 'Brand',
-      name: product.brand || 'PremiumShop'
+      name: product.brand || 'Prishane Hair'
     },
     offers: {
       '@type': 'Offer',
@@ -162,21 +162,23 @@ export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'PremiumShop Ghana',
+    name: 'Prishane Hair',
     url: 'https://premiumshop.com',
     logo: 'https://readdy.ai/api/search-image?query=premium%20shop%20logo%20elegant%20modern&width=200&height=200&seq=logo&orientation=squarish',
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+233-XX-XXX-XXXX',
+      telephone: '+233595211414',
       contactType: 'Customer Service',
       areaServed: 'GH',
       availableLanguage: ['English']
     },
-    sameAs: [
-      'https://facebook.com/premiumshop',
-      'https://instagram.com/premiumshop',
-      'https://twitter.com/premiumshop'
-    ]
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Oak villa Estate',
+      addressLocality: 'GE 021-8577',
+      addressCountry: 'GH'
+    },
+    sameAs: []
   };
 }
 
@@ -184,7 +186,7 @@ export function generateWebsiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'PremiumShop Ghana',
+    name: 'Prishane Hair',
     url: 'https://premiumshop.com',
     potentialAction: {
       '@type': 'SearchAction',
