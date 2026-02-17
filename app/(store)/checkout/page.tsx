@@ -666,8 +666,8 @@ export default function CheckoutPage() {
                   </div>
 
                   <h2 className="text-xl font-bold text-gray-900 mt-8 mb-4">Payment Method</h2>
-                  <p className="text-sm text-gray-600 mb-4">Select how you’d like to pay. All four options are listed below.</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <p className="text-sm text-gray-600 mb-4">Select how you’d like to pay. Paystack, Moolre, Stripe, or PayPal — choose one.</p>
+                  <div className="grid grid-cols-2 gap-3">
                     <label
                       className={`flex items-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-colors ${paymentMethod === 'paystack' ? 'border-gray-900 bg-gray-50' : 'border-gray-300 hover:border-gray-400'}`}
                     >
