@@ -11,6 +11,7 @@
     "stripe": "^20.3.1"
   },
   "devDependencies": {
+    "sharp": "^0.33.5",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -28,7 +29,9 @@
   "scripts": {
     "build": "next build",
     "dev": "cross-env NODE_ENV=development next dev -H 0.0.0.0 -p 3000",
-    "lint": "next lint"
+    "lint": "next lint",
+    "compress:images": "node scripts/compress-media.mjs",
+    "compress:video": "sh scripts/compress-video.sh"
   },
   "version": "0.1.0"
 }
