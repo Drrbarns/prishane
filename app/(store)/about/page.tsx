@@ -15,7 +15,7 @@ export default function AboutPage() {
   const heroSubtitle = getSetting('about_hero_subtitle') || 'A journey of passion, quality, and beauty.';
   const storyTitle = getSetting('about_story_title') || 'From Passion to Business';
   const storyContent = getSetting('about_story_content') || '';
-  const storyImage = getSetting('about_story_image') || 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=2669&auto=format&fit=crop';
+  const storyImage = getSetting('about_story_image') || '/sarahlawson.png';
   const founderName = getSetting('about_founder_name') || 'Founder';
   const founderTitle = getSetting('about_founder_title') || 'CEO';
   const mission1Title = getSetting('about_mission1_title') || 'Direct Sourcing';
@@ -61,7 +61,7 @@ export default function AboutPage() {
             src={storyImage} 
             alt="About Background" 
             className="w-full h-full object-cover"
-            onError={(e) => { const t = e.currentTarget; if (t.src !== '/about.jpg') t.src = '/about.jpg'; }}
+            onError={(e) => { const t = e.currentTarget; if (t.src !== '/sarahlawson.png') t.src = '/sarahlawson.png'; }}
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-gray-900/50 to-gray-900"></div>
@@ -84,7 +84,7 @@ export default function AboutPage() {
                   src={storyImage}
                   alt={`${founderName} - ${founderTitle}`}
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  onError={(e) => { const t = e.currentTarget; if (t.src !== '/about.jpg') t.src = '/about.jpg'; }}
+                  onError={(e) => { const t = e.currentTarget; if (t.src !== '/sarahlawson.png') t.src = '/sarahlawson.png'; }}
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 lg:p-12 text-white">
                   <p className="font-bold text-2xl mb-1">{founderName}</p>

@@ -249,7 +249,7 @@ export const defaultSettings: SiteSettings = {
     about_hero_subtitle: 'Where quality hair meets the crown you deserve.',
     about_story_title: 'Built for Queens, by a Queen',
     about_story_content: 'Prishane Hair started from a simple belief: every woman deserves to feel like royalty—without compromise on quality or style.\n\nWe source premium human hair and create wigs that look and feel like your own. No shortcuts, no synthetic substitutes where it matters. Just honest quality you can trust.\n\nWhether you\'re after a bold new look or a seamless everyday style, we\'re here to help you crown it.',
-    about_story_image: '/about-wig.png',
+    about_story_image: '/sarahlawson.png',
     about_founder_name: 'Prishane Hair',
     about_founder_title: 'Premium Hair & Wigs',
     about_mission1_title: 'Real Hair, Real Quality',
